@@ -10,10 +10,12 @@ namespace RiskyAssembler.Core.Bitfields
     {
         public byte Bitfield { get; set; }
 
-        public Bitfield8()
+        public Bitfield8(byte value = 0)
         {
-            Bitfield = 0;
+            Bitfield = value;
         }
+
+        #region Overloads and castings
 
         public static implicit operator Bitfield16(Bitfield8 bitfield8)
         {
@@ -37,6 +39,11 @@ namespace RiskyAssembler.Core.Bitfields
         public static implicit operator int(Bitfield8 bitfield8)
         {
             return bitfield8.Bitfield;
+        }
+
+        public static implicit operator Bitfield8(int a)
+        {
+            return new Bitfield8((byte)a);
         }
 
         public static implicit operator Bitfield8(byte a)
@@ -87,6 +94,7 @@ namespace RiskyAssembler.Core.Bitfields
             result.Bitfield = (byte)(bitfield.Bitfield >> count);
             return result;
         }
-
+        
+        #endregion
     }
 }

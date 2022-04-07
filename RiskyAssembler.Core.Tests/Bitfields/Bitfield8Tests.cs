@@ -60,7 +60,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield8 b = 1;
             Bitfield8 result = a & b;
 
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(0, (int)result);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield8 b = 1;
             Bitfield8 result = a | b;
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, (int)result);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield8 b = 1;
             Bitfield8 result = a ^ b;
 
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(0, (int)result);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield8 a = byte.MaxValue;
             Bitfield8 result = ~a;
 
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(0, (int)result);
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield8 a = 1;
             Bitfield8 result = a << 1;
 
-            Assert.AreEqual(2, result);
+            Assert.AreEqual(2, (int)result);
         }
          
         [TestMethod]
@@ -107,7 +107,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield8 a = 2;
             Bitfield8 result = a >> 1;
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, (int)result);
         }
 
         [TestMethod]

@@ -12,6 +12,8 @@
         - Must be able to print bitfield as string.
     - Implementation
         - 3 types of bitfield: Bitfield32, Bitfield16, Bitfield8, which wraps UInt32, UInt16, Byte respectively.
+        - Bitfield16 consists of a upper bitfield8 and a lower bitfield8.
+        - Bitfield32 consists of a upper bitfield16 and a lower bitfield16.
         - To concatenate bitfields, you left shift the target by the size of the source. Example
             - You want to construct an instruction from 4 bytes picked from memory, with the first one being the LSB.
             - Start with an empty int32 bitfield.

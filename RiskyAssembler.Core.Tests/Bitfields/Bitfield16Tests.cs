@@ -53,7 +53,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield16 b = 1;
             Bitfield16 result = a & b;
 
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(0, (int)result);
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield16 b = 1;
             Bitfield16 result = a | b;
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, (int)result);
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield16 b = 1;
             Bitfield16 result = a ^ b;
 
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(0, (int)result);
         }
 
         [TestMethod]
@@ -82,7 +82,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield16 a = UInt16.MaxValue;
             Bitfield16 result = ~a;
 
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(0, (int)result);
         }
 
         [TestMethod]
@@ -91,7 +91,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield16 a = 1;
             Bitfield16 result = a << 1;
 
-            Assert.AreEqual(2, result);
+            Assert.AreEqual(2, (int)result);
         }
 
         [TestMethod]
@@ -100,7 +100,7 @@ namespace RiskyAssembler.Core.Bitfields
             Bitfield16 a = 2;
             Bitfield16 result = a >> 1;
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(1, (int)result);
         }
 
         [TestMethod]
@@ -119,6 +119,41 @@ namespace RiskyAssembler.Core.Bitfields
             int bitfieldValue = _bitfield;
 
             Assert.IsInstanceOfType(bitfieldValue, typeof (int));
+        }
+
+        [TestMethod]
+        public void BothByteShouldBeOfTypeBitfield8()
+        {
+            Assert.IsInstanceOfType(_bitfield.UpperByte, typeof(Bitfield8));
+            Assert.IsInstanceOfType(_bitfield.LowerByte, typeof(Bitfield8));
+        }
+
+        [TestMethod]
+        public void SettingByteShouldUpdateBitfield()
+        {
+            int valueBeforeUpdate = _bitfield;
+
+            _bitfield.UpperByte = 1;
+
+            Assert.AreNotEqual(valueBeforeUpdate, (int)_bitfield.Bitfield);
+
+            valueBeforeUpdate = _bitfield;
+
+            _bitfield.LowerByte = 1;
+
+            Assert.AreNotEqual(valueBeforeUpdate, (int)_bitfield.Bitfield);
+        }
+
+        [TestMethod]
+        public void SettingBitfieldShouldUpdateBytes()
+        {
+            int upperBefore = _bitfield.UpperByte;
+            int lowerBefore = _bitfield.LowerByte;
+
+            _bitfield.Bitfield = 257;
+
+            Assert.AreNotEqual(upperBefore, _bitfield.UpperByte);
+            Assert.AreNotEqual(lowerBefore, _bitfield.LowerByte);
         }
     }
 }
