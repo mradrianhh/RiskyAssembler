@@ -126,9 +126,13 @@ Since the PC keeps the address of the next instruction in bytes, it gets increme
 Lets illustrate a sample program, and show the address of the instructions.
 
 00:  ADDI x2, zero, 1   # Add Immediate: x2 ← 0  + 1   
+
 04:  SUB x1, x1, x2     # Subtract: x1 ← x1 - 1
+
 08:  SW  x1, 4(zero)    # Store word: x1 → [4 + 0]
+
 12:  BLT zero, x1, -8   # Branch Less than: 0 < x1 => PC ← PC - 8 = 4
+
 16:  HLT                # Halt, stop execution
 
 #### Addressing memory
