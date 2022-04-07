@@ -1,6 +1,6 @@
 # Plan moving ahead
 
-1. Implement a bitfield.
+1. Implement a bitfield
     - Requirements
         - Must be able to concatenate bitfields. I.e: Bitfield(8) + Bitfield(8) = Bitfield(16)
         - Must be able to split bitfields. I.e Bitfield(16)[0:7] = Bitfield(8)
@@ -17,7 +17,7 @@
         - Implemented similar to an array.
         - Worst case scenario, implemented using an array of chars, meaning each bit will take up 8 bits in actual memory.
 
-2. Implement instruction decoding.
+2. Implement instruction decoding
     -Requirements
         - Each instruction should be decoded into an Instruction object.
         - You should be able to encode an Instruction object back into a bitfield for debugging and UI purposes.
