@@ -1,4 +1,4 @@
-![](https://www.google.com/url?sa=i&url=https%3A%2F%2Friscv.org%2F&psig=AOvVaw3YiUslaPUxB1jL--B5BZRl&ust=1649428115445000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCMDVmNyUgvcCFQAAAAAdAAAAABAD)
+![](/docs/Assets/risc-v-logo.png)
 
 # RiskyAssembler
 RISC-V Assembler Simulator
