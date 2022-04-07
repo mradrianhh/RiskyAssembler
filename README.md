@@ -5,9 +5,24 @@ RISC-V Assembler Simulator
 
 Based on the [RISC-V Instruction Set](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf)
 
-# Implementation
+# Architecture specifications
 
 At first, the RV32I(32-bit base integer instruction set) will only be implemented. Further extension of the assembler will happen in the future for including RV64I and RV128I.
+
+The RISC-V Architecture implements little-endian, meaning the least significant byte is at the lowest memory address.
+
+The RISC-V Architecture is a Load-Store architecture,
+meaning instructions only address registers, with store and load communicating with memory.
+
+In instructions, you may see a notation such as LB, LH, LW, 
+with all of them being Load instructions denoted by a character.
+
+The character indicates the following:
+- B - Byte(8-bits)
+- H - Half(16-bits)
+- W - Word(32-bits)
+
+Instructions may also be denoted with U, indicating that they are unsigned.
 
 ## Instruction format
 
@@ -80,6 +95,8 @@ where the opcode in combination with funct3 and funct7 specifies the operation t
 
 ## Architecture
 
+### CPU
+
 - Registers
     - 32 integer registers
         - Zero(x0) Always zero
@@ -96,8 +113,42 @@ where the opcode in combination with funct3 and funct7 specifies the operation t
         - s2-11(x18-27) Saved register
         - t3-6(x28-31) Temporary
 
-## Assembly flow
+### Virtual Computer
 
-1. Parse file
-    1. Format the file
-    2. Get the tokens
+#### Startup and program flow
+
+When we press reset, the computer runs the startup-script. Upon startup, the computer sets up the vector table and exception handlers, among them, the reset handler. So, upon resetting, the reset handler is activated and the computer copies over all the memory and the code from the flash drive to the RAM, zeroes out the .bss section, and jumps to the the main function of our program, from which the program flow is controlled.
+
+Each instruction, is 32-bits wide, which is equivalent to 4 bytes. Meaning, that the first instruction will be at address 0, the next at address 4, and so on. Since the architecture is little-endian, the LSB will be at the lowest address.
+
+Since the PC keeps the address of the next instruction in bytes, it gets incremented by 4 bytes each time. So, if we wish to increase the PC by 3 instructions, we have to increase it by 12 bytes.
+
+Lets illustrate a sample program, and show the address of the instructions.
+
+00:  ADDI x2, zero, 1   # Add Immediate: x2 ← 0  + 1   
+04:  SUB x1, x1, x2     # Subtract: x1 ← x1 - 1
+08:  SW  x1, 4(zero)    # Store word: x1 → [4 + 0]
+12:  BLT zero, x1, -8   # Branch Less than: 0 < x1 => PC ← PC - 8 = 4
+16:  HLT                # Halt, stop execution
+
+#### Addressing memory
+
+As you know by now, the program is stored in memory, each instruction of the program is 4 bytes long, the LSB is stored in the smallest address, and to move to the next instruction, we have to increase the program counter by 4(bytes).
+
+This means that each memory cell is 1 byte(8-bits), and as such, if we wish to load the content of memory location 0 in register x1, we can just load the byte at address zero.
+
+LB  x1, 0(x0)
+
+We can also load two bytes, or a half-word.
+
+LH  x1, 2(x0) # x1 <- [2] x1 gets content at address 2.
+
+Or 4 bytes, or a word.
+
+LW  x1, 4(x0) # x1 <- [4] x1 gets content at address 4.
+
+#### The stack
+
+In this implementation, the stack grows down in increments of a byte, with the stackpointer pointing at the next available byte. By moving the stackpointer down, we can allocate free space on the stack, creating what we refer the as a stack frame, with the framepointer pointing at the top of it.
+
+On startup, we set the SP and FP to point to the top of the stack as this computer will have no operating system. It will work as a simple micro-controller, executing one program, and one program only: the one that is stored in the .text segment of it's memory.
