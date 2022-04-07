@@ -11,7 +11,7 @@ At first, the RV32I(32-bit base integer instruction set) will only be implemente
 
 ## Instruction format
 
-There are 6 instruction formats:
+There are 6 instruction formats
     - Register
     - Immediate
     - Upper immediate
@@ -19,7 +19,7 @@ There are 6 instruction formats:
     - Branch
     - Jump
 
-Each instruction may consist of these bit-segments:
+Each instruction may consist of these bit-segments
     - opcode
     - rd
     - funct3
