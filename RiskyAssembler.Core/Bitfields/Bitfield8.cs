@@ -12,7 +12,7 @@ namespace RiskyAssembler.Core.Bitfields
 
         public Bitfield8()
         {
-            Bitfield = 0b00000000;
+            Bitfield = 0;
         }
 
         public static implicit operator Bitfield16(Bitfield8 bitfield8)
@@ -29,9 +29,14 @@ namespace RiskyAssembler.Core.Bitfields
             return bitfield32;
         }
 
+        public static implicit operator byte(Bitfield8 bitfield8)
+        {
+            return bitfield8.Bitfield;
+        }
+
         public static implicit operator int(Bitfield8 bitfield8)
         {
-            return (int)bitfield8.Bitfield;
+            return bitfield8.Bitfield;
         }
 
         public static implicit operator Bitfield8(byte a)

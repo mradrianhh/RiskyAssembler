@@ -1,22 +1,23 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace RiskyAssembler.Core.Bitfields
 {
     [TestClass]
-    public class Bitfield8Tests
+    public class Bitfield16Tests
     {
-        private Bitfield8 _bitfield;
+        private Bitfield16 _bitfield;
 
-        public Bitfield8Tests()
+        public Bitfield16Tests()
         {
-            _bitfield = new Bitfield8();
+            _bitfield = new Bitfield16();
         }
 
 
         [TestMethod]
-        public void FieldShouldBeOfTypeByte()
+        public void FieldShouldBeOfTypeUInt16()
         {
-            Assert.IsInstanceOfType(_bitfield.Bitfield, typeof(byte));
+            Assert.IsInstanceOfType(_bitfield.Bitfield, typeof(UInt16));
         }
 
         [TestMethod]
@@ -29,14 +30,6 @@ namespace RiskyAssembler.Core.Bitfields
         public void ShouldConvertToString()
         {
             Assert.Inconclusive();
-        }
-
-        [TestMethod]
-        public void ShouldBeImplicitCastableToBitfield16()
-        {
-            Bitfield16 bitfield16 = _bitfield;
-
-            Assert.IsInstanceOfType(bitfield16, typeof(Bitfield16));
         }
 
         [TestMethod]
@@ -56,9 +49,9 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseAND()
         {
-            Bitfield8 a = 0;
-            Bitfield8 b = 1;
-            Bitfield8 result = a & b;
+            Bitfield16 a = 0;
+            Bitfield16 b = 1;
+            Bitfield16 result = a & b;
 
             Assert.AreEqual(0, result);
         }
@@ -66,9 +59,9 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseOR()
         {
-            Bitfield8 a = 0;
-            Bitfield8 b = 1;
-            Bitfield8 result = a | b;
+            Bitfield16 a = 0;
+            Bitfield16 b = 1;
+            Bitfield16 result = a | b;
 
             Assert.AreEqual(1, result);
         }
@@ -76,9 +69,9 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseXOR()
         {
-            Bitfield8 a = 1;
-            Bitfield8 b = 1;
-            Bitfield8 result = a ^ b;
+            Bitfield16 a = 1;
+            Bitfield16 b = 1;
+            Bitfield16 result = a ^ b;
 
             Assert.AreEqual(0, result);
         }
@@ -86,8 +79,8 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseUnary()
         {
-            Bitfield8 a = byte.MaxValue;
-            Bitfield8 result = ~a;
+            Bitfield16 a = UInt16.MaxValue;
+            Bitfield16 result = ~a;
 
             Assert.AreEqual(0, result);
         }
@@ -95,28 +88,28 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseLeftShift()
         {
-            Bitfield8 a = 1;
-            Bitfield8 result = a << 1;
+            Bitfield16 a = 1;
+            Bitfield16 result = a << 1;
 
             Assert.AreEqual(2, result);
         }
-         
+
         [TestMethod]
         public void ShouldSupportBitwiseRightShift()
         {
-            Bitfield8 a = 2;
-            Bitfield8 result = a >> 1;
+            Bitfield16 a = 2;
+            Bitfield16 result = a >> 1;
 
             Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void ShouldBeConvertableToByte()
+        public void ShouldBeConvertableToUInt16()
         {
             _bitfield.Bitfield = 8;
-            byte bitfieldValue = _bitfield;
+            UInt16 bitfieldValue = _bitfield;
 
-            Assert.IsInstanceOfType(bitfieldValue, typeof(byte));
+            Assert.IsInstanceOfType(bitfieldValue, typeof(UInt16));
         }
 
         [TestMethod]
@@ -125,7 +118,7 @@ namespace RiskyAssembler.Core.Bitfields
             _bitfield.Bitfield = 8;
             int bitfieldValue = _bitfield;
 
-            Assert.IsInstanceOfType(bitfieldValue, typeof(int));
+            Assert.IsInstanceOfType(bitfieldValue, typeof (int));
         }
     }
 }

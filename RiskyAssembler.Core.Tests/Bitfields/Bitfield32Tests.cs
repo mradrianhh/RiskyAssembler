@@ -1,22 +1,23 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace RiskyAssembler.Core.Bitfields
 {
     [TestClass]
-    public class Bitfield8Tests
+    public class Bitfield32Tests
     {
-        private Bitfield8 _bitfield;
+        private Bitfield32 _bitfield;
 
-        public Bitfield8Tests()
+        public Bitfield32Tests()
         {
-            _bitfield = new Bitfield8();
+            _bitfield = new Bitfield32();
         }
 
 
         [TestMethod]
-        public void FieldShouldBeOfTypeByte()
+        public void FieldShouldBeOfTypeUInt32()
         {
-            Assert.IsInstanceOfType(_bitfield.Bitfield, typeof(byte));
+            Assert.IsInstanceOfType(_bitfield.Bitfield, typeof(UInt32));
         }
 
         [TestMethod]
@@ -32,22 +33,6 @@ namespace RiskyAssembler.Core.Bitfields
         }
 
         [TestMethod]
-        public void ShouldBeImplicitCastableToBitfield16()
-        {
-            Bitfield16 bitfield16 = _bitfield;
-
-            Assert.IsInstanceOfType(bitfield16, typeof(Bitfield16));
-        }
-
-        [TestMethod]
-        public void ShouldBeImplicitCastableToBitfield32()
-        {
-            Bitfield32 bitfield32 = _bitfield;
-
-            Assert.IsInstanceOfType(bitfield32, typeof(Bitfield32));
-        }
-
-        [TestMethod]
         public void ShouldBeAbleToToggleIndividualBit()
         {
             Assert.Inconclusive();
@@ -56,9 +41,9 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseAND()
         {
-            Bitfield8 a = 0;
-            Bitfield8 b = 1;
-            Bitfield8 result = a & b;
+            Bitfield32 a = 0;
+            Bitfield32 b = 1;
+            Bitfield32 result = a & b;
 
             Assert.AreEqual(0, result);
         }
@@ -66,9 +51,9 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseOR()
         {
-            Bitfield8 a = 0;
-            Bitfield8 b = 1;
-            Bitfield8 result = a | b;
+            Bitfield32 a = 0;
+            Bitfield32 b = 1;
+            Bitfield32 result = a | b;
 
             Assert.AreEqual(1, result);
         }
@@ -76,9 +61,9 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseXOR()
         {
-            Bitfield8 a = 1;
-            Bitfield8 b = 1;
-            Bitfield8 result = a ^ b;
+            Bitfield32 a = 1;
+            Bitfield32 b = 1;
+            Bitfield32 result = a ^ b;
 
             Assert.AreEqual(0, result);
         }
@@ -86,8 +71,8 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseUnary()
         {
-            Bitfield8 a = byte.MaxValue;
-            Bitfield8 result = ~a;
+            Bitfield32 a = UInt32.MaxValue;
+            Bitfield32 result = ~a;
 
             Assert.AreEqual(0, result);
         }
@@ -95,28 +80,28 @@ namespace RiskyAssembler.Core.Bitfields
         [TestMethod]
         public void ShouldSupportBitwiseLeftShift()
         {
-            Bitfield8 a = 1;
-            Bitfield8 result = a << 1;
+            Bitfield32 a = 1;
+            Bitfield32 result = a << 1;
 
             Assert.AreEqual(2, result);
         }
-         
+
         [TestMethod]
         public void ShouldSupportBitwiseRightShift()
         {
-            Bitfield8 a = 2;
-            Bitfield8 result = a >> 1;
+            Bitfield32 a = 2;
+            Bitfield32 result = a >> 1;
 
             Assert.AreEqual(1, result);
         }
 
         [TestMethod]
-        public void ShouldBeConvertableToByte()
+        public void ShouldBeConvertableToUInt32()
         {
             _bitfield.Bitfield = 8;
-            byte bitfieldValue = _bitfield;
+            UInt32 bitfieldValue = _bitfield;
 
-            Assert.IsInstanceOfType(bitfieldValue, typeof(byte));
+            Assert.IsInstanceOfType(bitfieldValue, typeof(UInt32));
         }
 
         [TestMethod]
