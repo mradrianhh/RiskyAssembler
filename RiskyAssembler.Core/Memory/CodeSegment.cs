@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RiskyAssembler.Core.Memory
+﻿namespace RiskyAssembler.Core.Memory
 {
     public class CodeSegment
     {
         private readonly byte[] _code;
-        public int Length { get; private set; } 
+        public int Length { get; private set; }
 
         public CodeSegment(Memory memory, int _cstart, int _cend)
         {

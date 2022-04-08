@@ -57,19 +57,41 @@
         - Byte[] copied from memory
         - Wrapper around a byte array.
 
-7. Implement CPU
+7. Implement registers component.
+    - Requirements
+        - Must be able to retrieve a register with an string key indexer. I. e: Registers["x0"].
+    - Implementation
+        - Dictionary of registers and their identifier.
+
+8. Implement CPU clock.
+    - Requirements
+        - Must run at a chosen frequency
+        - Each time it ticks, it executes the Systick function in the CPU.
+
+9. Implement CPU
     - Requirements
         - Must be able to toggle STATUS register.
         - Must be able to fetch instruction from memory.
         - Must be able to increment PC by 4 bytes.
         - Must throw AddressMisalignedException if instruction isn't four-byte aligned in memory.
+        - Must be able to load and store in memory(data segment).
     - Implementation
         - 32 general registers
         - PC and STATUS special registers
         - For now, fetches instructions sequentially.
         - In the future, caches instructions into an instruction bus.
+        - Has a cycle method that gets invoked by the clock everytime it ticks.
 
-8. Implement instruction decoding
+10. Implement Computer
+    - Implementation
+        - When the clock ticks, the cpu executes a cpu cycle.
+
+11. Implement stack segment
+    - Implementation
+        - Is a byte[] copied from memory.
+        - Starts at the end of the memory, grows backwards.
+
+12. Implement instruction decoding
     - Requirements
         - Each instruction should be decoded into an Instruction object.
         - You should be able to encode an Instruction object back into a bitfield for debugging and UI purposes.

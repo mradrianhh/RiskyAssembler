@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RiskyAssembler.Core.Bitfields
+﻿namespace RiskyAssembler.Core.Bitfields
 {
     public struct Bitfield16
     {
@@ -41,7 +35,6 @@ namespace RiskyAssembler.Core.Bitfields
             }
         }
 
-
         public Bitfield16(UInt16 value)
         {
             Bitfield = value;
@@ -59,7 +52,7 @@ namespace RiskyAssembler.Core.Bitfields
 
         public static implicit operator Bitfield32(Bitfield16 bitfield16)
         {
-            return new Bitfield32 (bitfield16.Bitfield);
+            return new Bitfield32(bitfield16.Bitfield);
         }
 
         public static implicit operator UInt16(Bitfield16 bitfield16)

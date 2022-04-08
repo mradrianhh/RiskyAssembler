@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace RiskyAssembler.Core.CPU
+namespace RiskyAssembler.Core.Computer
 {
 
     [TestClass]
@@ -9,7 +9,18 @@ namespace RiskyAssembler.Core.CPU
         [TestMethod]
         public void ShouldHave32GeneralRegisters()
         {
-            Assert.Inconclusive();
+            CPU cpu = new CPU();
+
+            Assert.AreEqual(32, cpu.Registers.Length);
+        }
+
+        [TestMethod]
+        public void ShouldHavePCAndSTATUSRegister()
+        {
+            CPU cpu = new CPU();
+
+            Assert.IsNotNull(cpu.PC);
+            Assert.IsNotNull(cpu.STATUS);
         }
 
         [TestMethod]

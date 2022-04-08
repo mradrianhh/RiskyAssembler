@@ -1,11 +1,6 @@
 ﻿using RiskyAssembler.Core.Bitfields;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RiskyAssembler.Core.CPU
+namespace RiskyAssembler.Core.Computer
 {
     public struct Register
     {
@@ -59,6 +54,31 @@ namespace RiskyAssembler.Core.CPU
         public static implicit operator Register(Bitfield8 bitfield)
         {
             return new Register(bitfield);
+        }
+
+        public static implicit operator int(Register register)
+        {
+            return register._bitfield;
+        }
+
+        public static Register operator +(Register register, int a)
+        {
+            return new Register(register._bitfield + a);
+        }
+
+        public static Register operator -(Register register, int a)
+        {
+            return new Register(register._bitfield - a);
+        }
+
+        public static Register operator *(Register register, int a)
+        {
+            return new Register(register._bitfield * a);
+        }
+
+        public static Register operator /(Register register, int a)
+        {
+            return new Register(register._bitfield / a);
         }
     }
 }

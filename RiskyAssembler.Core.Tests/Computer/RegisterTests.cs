@@ -2,7 +2,7 @@
 using RiskyAssembler.Core.Bitfields;
 using System;
 
-namespace RiskyAssembler.Core.CPU
+namespace RiskyAssembler.Core.Computer
 {
     [TestClass]
     public class RegisterTests
