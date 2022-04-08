@@ -30,6 +30,8 @@
         - Bonus: you don't have to write the library in C and use interop.
 
 2. Implement register
+    - Requirements
+        - Must be convertable to Bitfield32
     - Implementation
         - Is a wrapper around a Bitfield32.
         - Has an integer identifier.
@@ -45,7 +47,29 @@
         - The startup script will specify exception handlers to deal with stack overflows and all other exceptions. It will also copy over the data and code from flash memory, and zero out the .bss section before it points the program counter at the main function in our code. This script will run everytime we press the reset button.
         - For now, we will just have to hardcode in the specification that should be given by the linker script and implemented in memory by the startup script.
 
-4. Implement instruction decoding
+5. Implement Code segment
+    - Implementation
+        - Readonly byte[] copied from memory
+        - Wrapper around a byte array.
+
+6. Implement Memory segment
+    - Implementation
+        - Byte[] copied from memory
+        - Wrapper around a byte array.
+
+7. Implement CPU
+    - Requirements
+        - Must be able to toggle STATUS register.
+        - Must be able to fetch instruction from memory.
+        - Must be able to increment PC by 4 bytes.
+        - Must throw AddressMisalignedException if instruction isn't four-byte aligned in memory.
+    - Implementation
+        - 32 general registers
+        - PC and STATUS special registers
+        - For now, fetches instructions sequentially.
+        - In the future, caches instructions into an instruction bus.
+
+8. Implement instruction decoding
     - Requirements
         - Each instruction should be decoded into an Instruction object.
         - You should be able to encode an Instruction object back into a bitfield for debugging and UI purposes.

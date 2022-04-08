@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RiskyAssembler.Core.Bitfields
 {
-    public class Bitfield16
+    public struct Bitfield16
     {
-        private UInt16 _bitfield;
+        private UInt16 _bitfield = 0;
         public UInt16 Bitfield
         {
             get { return _bitfield; }
@@ -19,7 +19,7 @@ namespace RiskyAssembler.Core.Bitfields
             }
         }
 
-        private Bitfield8 _upperByte;
+        private Bitfield8 _upperByte = 0;
         public Bitfield8 UpperByte
         {
             get { return _upperByte; }
@@ -30,7 +30,7 @@ namespace RiskyAssembler.Core.Bitfields
             }
         }
 
-        private Bitfield8 _lowerByte;
+        private Bitfield8 _lowerByte = 0;
         public Bitfield8 LowerByte
         {
             get { return _lowerByte; }
@@ -41,10 +41,6 @@ namespace RiskyAssembler.Core.Bitfields
             }
         }
 
-        public Bitfield16()
-        {
-            Bitfield = 0;
-        }
 
         public Bitfield16(UInt16 value)
         {
