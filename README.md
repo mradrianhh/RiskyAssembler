@@ -26,13 +26,15 @@ Instructions may also be denoted with U, indicating that they are unsigned.
 
 ## Instruction format
 
-- There are 6 instruction formats
-    - Register
-    - Immediate
-    - Upper immediate
-    - Store
-    - Branch
-    - Jump
+The instructions are a fixed 32-bit length, and are aligned on a two-byte boundary. In memory, they must be aligned on a four-byte boundary.
+
+- There are 6 instruction formats(R/I/S/B/U/J)
+    - Register(R)
+    - Immediate(I)
+    - Upper immediate(U)
+    - Store(S)
+    - Branch(B)
+    - Jump(J)
 
 - Each instruction may consist of these bit-segments
     - opcode
@@ -77,28 +79,69 @@ where the opcode in combination with funct3 and funct7 specifies the operation t
 
 - Branch
     - bit[0:6]      Opcode
-    - bit[7]        [11]
+    - bit[7]        Imm[11]
     - bit[8:11]     Imm[4:1] 
     - bit[12:14]    Funct3
     - bit[15:19]    Rs1
     - bit[20:24]    Rs2
     - bit[25:30]    Imm[10:5]
-    - bit[31]       [12]
+    - bit[31]       Imm[12]
 
 - Jump
     - bit[0:6]      Opcode
     - bit[7:11]     Rd
     - bit[12:19]    Imm[19:12]
-    - bit[20]       [11]
+    - bit[20]       Imm[11]
     - bit[21:30]    Imm[10:1]
-    - bit[31]       [20]
+    - bit[31]       Imm[20]
+
+Please note that the immediate value is the combination of the varius immediate subfields in the instruction. And the different immediate subfields are labeled with their bits in the final immediate value. By example in the jump instruction format:
+
+Imm[20:1] = Imm[10:1] + Imm[11] + Imm[19:12] + Imm[20]
+
+Please note also, that the sign bit of the immediate is always bit 31 in the instruction.
+
+Furthermore, the rs1, rs2 and rd are always in the same position when they exist in the format.
+
+The width of rd, rs1, and rs2 aren't 5 by coincidence. By having 5 bits, the number of values are 31, which corresponds to the amount of registers. Thus, rd, rs1 and rs2 encodes the corresponding registers.
+
+#### Register-Immediate instructions (I)
+
+- bit[0:6]      Opcode
+- bit[7:11]     Rd
+- bit[12:14]    Funct3
+- bit[15:19]    Rs1
+- bit[20:31]    Imm[11:0]
+
+An example of a register-immediate instruction is:
+
+ADDI rd, rs1, 0
+
+with rd being the destination register encoded in bit[7:11], with
+rs1, encoded in bit[15:19], being the register whose value is added to the immediate value 0, encoded in bit[20:31].
+
+#### Register-Register instructions (R)
+
+- bit[0:6]      Opcode
+- bit[7:11]     Rd
+- bit[12:14]    Funct3
+- bit[15:19]    Rs1
+- bit[20:24]    Rs2
+- bit[25:31]    Funct7
+
+An example of a register-register instruction is:
+
+ADD rd, rs1, rs2
+
+Again, rd is the destination register who is loaded with the value of the summation of rs1 and rs2, and the appropriate encoding are shown above.
+
 
 ## Architecture
 
 ### CPU
 
 - Registers
-    - 32 integer registers
+    - 32 integer registers (x0 - x31)
         - Zero(x0) Always zero
         - ra(x1) Return address
         - sp(x2) Stack pointer

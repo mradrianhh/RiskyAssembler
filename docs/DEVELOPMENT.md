@@ -28,7 +28,12 @@
         - One can toggle individual bits using bitwise operations.
         - Bonus: you don't have to write the library in C and use interop.
 
-2. Implement instruction decoding
+2. Implement register
+    - Implementation
+        - Is a wrapper around a Bitfield32.
+        - Has an identifier
+
+3. Implement instruction decoding
     - Requirements
         - Each instruction should be decoded into an Instruction object.
         - You should be able to encode an Instruction object back into a bitfield for debugging and UI purposes.
