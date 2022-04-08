@@ -10,6 +10,7 @@
         - Must be able to decode bitfield into instruction.
         - Must be able to convert bitfield into integer.
         - Must be able to print bitfield as string.
+        - Must be able to decompose bitfields into bytes(bitfield8).
     - Implementation
         - 3 types of bitfield: Bitfield32, Bitfield16, Bitfield8, which wraps UInt32, UInt16, Byte respectively.
         - Bitfield16 consists of a upper bitfield8 and a lower bitfield8.
@@ -31,9 +32,20 @@
 2. Implement register
     - Implementation
         - Is a wrapper around a Bitfield32.
-        - Has an identifier
+        - Has an integer identifier.
+        - Has a string symbolic name.
 
-3. Implement instruction decoding
+3. Implement memory
+    - Implementation
+        - For now, let it just be an array of bytes.
+        - In the future, consider seperating SRAM and FLASH, and requiring a start-up script to run before the program runs.
+        - Let the code be stored from the beginning of the array, meaning the available space for data storage will decrease as the code increases.
+        - The stack should start at the end of the array and grow backwards, as specified.
+        - In the future, the linked script will specify where the .text segment(program code) starts and ends, and where the different data segments(.bss, .data) starts and ends, and also where the stack starts and ends.
+        - The startup script will specify exception handlers to deal with stack overflows and all other exceptions. It will also copy over the data and code from flash memory, and zero out the .bss section before it points the program counter at the main function in our code. This script will run everytime we press the reset button.
+        - For now, we will just have to hardcode in the specification that should be given by the linker script and implemented in memory by the startup script.
+
+4. Implement instruction decoding
     - Requirements
         - Each instruction should be decoded into an Instruction object.
         - You should be able to encode an Instruction object back into a bitfield for debugging and UI purposes.

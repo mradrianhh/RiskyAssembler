@@ -26,7 +26,7 @@ Instructions may also be denoted with U, indicating that they are unsigned.
 
 ## Instruction format
 
-The instructions are a fixed 32-bit length, and are aligned on a two-byte boundary. In memory, they must be aligned on a four-byte boundary.
+The instructions are a fixed 32-bit length, and are aligned on a four-byte boundary in memory.
 
 - There are 6 instruction formats(R/I/S/B/U/J)
     - Register(R)
@@ -155,6 +155,9 @@ Again, rd is the destination register who is loaded with the value of the summat
         - a2-7(x12-17) Function argument
         - s2-11(x18-27) Saved register
         - t3-6(x28-31) Temporary
+    - Special registers
+        - Program counter
+        - Status(flags for overflow, lt, gt, equal, etc..)
 
 ### Virtual Computer
 
