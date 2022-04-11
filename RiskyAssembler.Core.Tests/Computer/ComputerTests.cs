@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace RiskyAssembler.Core.Computer
 {
@@ -6,10 +7,17 @@ namespace RiskyAssembler.Core.Computer
     public class ComputerTests
     {
         private Computer _computer;
+        private Mock<IClock> mockClock;
+        private Mock<ICPU> mockCPU;
 
         public ComputerTests()
         {
-            _computer = new Computer();
+            mockClock = new Mock<IClock>();
+            mockClock.SetupProperty(clock => clock.Frequency, 1);
+
+            mockCPU = new Mock<ICPU>();
+
+            _computer = new Computer(mockClock.Object, mockCPU.Object);
         }
 
         [TestMethod]

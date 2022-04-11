@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Core.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Console", "RiskyAssembler.Console\RiskyAssembler.Console.csproj", "{C76E8B35-C9AA-4133-A5F9-11FD2B115EDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Assembler", "RiskyAssembler.Assembler\RiskyAssembler.Assembler.csproj", "{D5B60393-CC91-4724-9F75-0DE4AADA2F41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{C76E8B35-C9AA-4133-A5F9-11FD2B115EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C76E8B35-C9AA-4133-A5F9-11FD2B115EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C76E8B35-C9AA-4133-A5F9-11FD2B115EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B60393-CC91-4724-9F75-0DE4AADA2F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B60393-CC91-4724-9F75-0DE4AADA2F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B60393-CC91-4724-9F75-0DE4AADA2F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B60393-CC91-4724-9F75-0DE4AADA2F41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

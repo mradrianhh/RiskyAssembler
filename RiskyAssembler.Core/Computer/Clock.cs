@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace RiskyAssembler.Core.Computer
 {
-    public class Clock
+    public delegate void TickHandler();
+
+    public class Clock : IClock
     {
         private double _frequency;
         public double Frequency
@@ -29,9 +31,8 @@ namespace RiskyAssembler.Core.Computer
                 CalculateFrequency(value);
             }
         }
-        
-        public delegate void Tick_Handler();
-        public event Tick_Handler onTick;
+
+        public event TickHandler Ticked;
 
         private bool _ticking = true;
 
@@ -45,8 +46,13 @@ namespace RiskyAssembler.Core.Computer
             while (_ticking)
             {
                 System.Threading.Thread.Sleep((int)_tickTime);
-                onTick?.Invoke();
+                OnTicked();
             }
+        }
+
+        private void OnTicked()
+        {
+            Ticked?.Invoke();
         }
 
         public void Start()

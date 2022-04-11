@@ -97,3 +97,121 @@
         - You should be able to encode an Instruction object back into a bitfield for debugging and UI purposes.
         - Each instruction should have a display string consisting of the instruction address, and the actual instruction commands written by the programmer without the comments. I.e "00: LB   x1, 2(x0)"
         - Each instruction should have a Command associated with it which actually executes the instruction.
+
+# Assembler
+
+## ABI
+
+There must be an ABI definition file which defines the macros, or symbolic names, for the registers.
+
+The ABI must act as an intermediary which the parser parses according to. That is, if it reads zero in the assembly code,
+that corresponds to register x0.
+
+The ABI provides a mapping between the symbolic tokens used by the programmer, and the tokens which get converted to machine language.
+
+### Register usage
+
+x0(zero) always contains the value 0, this cannot be changed.
+
+By convention, when you wish to preserve some values before a function call, you place them in s-registers(s0-s11), which corresponds to registers
+x8, x9 and x18-x27, with x8(s0) also acting as the frame pointer.
+
+Temporary values which need not be reserved, are placed in the temporary registers(t-registers), t0-t6, which corresponds to x5-x7 and x28-x31.
+
+When passing function arguments, the convention is to place them in the a-registers(a0-a7), which corresponds to x10-x17, with a0 holding the result
+after the function has completed.
+
+When entering a subroutine, the current address is saved in the ra(x1) register, so that it can be restored upon returning from the subroutine.
+
+The last important register, is x2, the stackpointer, which tracks the next available byte in the stack.
+
+The desired goal of these conventions, are to reduce memory access from the CPU. In the past, constantly pushing and popping values of the stack to
+preserve them, was the norm, and we still have to do that today, you can only imagine trying to perform recursive algorithms without that capability.
+The main problem we're trying to address when coming up with this convention, is the fact that the internal memory access of the CPU is insanely fast compared to the memory access which are required, even when only manipulating the stack, so by allowing arguments to be preserved in the registers, we reduce the total overhead by removing stack manipulations when possible.
+
+### Syntax
+
+A typical instruction has the following format:
+
+OPCODE rd, rs1, rs2
+
+with rd being the destination register, and rs1/rs2 being the source registers. All risc-v instructions has 3 arguments, if not, they are pseudo-instructions, which are aliases for one or more risc-v instructions which, again, do have 3 arguments in actuality.
+
+
+Comments are denoted by a '#', as such:
+
+OPCODE rd, rs1, rs2 # A comment
+
+with everything trailing the '#' on the same line being considered a comment.
+
+
+Labels are strings with no whitespace that ends in a colon, ':'. An example of a valid label is:
+
+do_instruction:
+    OPCODE rd, rd1, rd2 # Doing an instruction
+
+Labels are syntactic sugar that relieves the programmer of the task of remembering the address of an instruction in code. That is, it's the assemblers job to associate a label with an instructions address. Labels are not an instruction, they are simply a variable which gets resolved by the assembler for usage in jumps and branches.
+
+
+Tokens are separated by whitespace, commas or both. For the instruction above, the tokens would be do_instruction, OPCODE, rd, rs1 and rs2.
+
+### Interface
+
+- string LookupToken(string);
+
+
+## Parser
+
+Parser interface
+    - void Format()
+    - void Parse()
+    - void LoadInstructions()
+
+### Example program
+
+To help pinpoint how we need to parse a risc-v assembly file, we'll provide a basic example program which helps illustrate the syntax.
+
+ADDI x2, x0, 1 # Mov 1 to x2.
+
+loop:
+    SUB x1, x1, x2 # Decrement x1.
+    SW  x1, 4(x0) # Store 4 + x0 in x1.
+    BLT x0, x1, loop # If x0 < x1, jump to the address associated with the 'loop' label.
+
+
+### Format()
+
+Remove comments.
+
+ADDI x2, x0, 1
+
+loop:
+    SUB x1, x1, x2
+    SW  x1, 4(x0)
+    BLT x0, x1, loop
+
+Convert tab to spaces. 1 tab = 4 spaces.
+
+ADDI x2, x0, 1
+
+loop:
+    SUB x1, x1, x2
+    SW  x1, 4(x0)
+    BLT x0, x1, loop
+
+Remove unneccessary spaces.
+
+ADDI x2, x0, 1
+loop:
+SUB x1, x1, x2
+SW  x1, 4(x0)
+BLT x0, x1, loop
+
+Remove commas.
+
+ADDI x2 x0 1
+loop:
+SUB x1 x1 x2
+SW  x1 4(x0)
+BLT x0 x1 loop
+

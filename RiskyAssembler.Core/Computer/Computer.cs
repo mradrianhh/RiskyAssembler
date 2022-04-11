@@ -1,28 +1,28 @@
 ﻿namespace RiskyAssembler.Core.Computer
 {
-    public class Computer
+    public class Computer : IComputer
     {
         public const string SP = "x2";
         public const string FP = "x8";
 
-        public Clock Clock { get; set; }
-        public CPU CPU { get; set; }
+        public IClock Clock { get; set; }
+        public ICPU CPU { get; set; }
 
         private Memory.Memory _memory;
         private Memory.CodeSegment _code;
         private Memory.DataSegment _data;
         private Memory.StackSegment _stack;
 
-        public Computer()
+        public Computer(IClock clock, ICPU cpu)
         {
-            Clock = new Clock(1);
-            CPU = new CPU();
+            Clock = clock;
+            CPU = cpu;
             _memory = new Memory.Memory(1024);
             _code = new Memory.CodeSegment(_memory, 0, 100);
             _data = new Memory.DataSegment(_memory, 100, 800);
             _stack = new Memory.StackSegment(_memory, 800, 1024);
 
-            Clock.onTick += CPU.Cycle;
+            Clock.Ticked += CPU.Cycle;
         }
 
         public void Reset()

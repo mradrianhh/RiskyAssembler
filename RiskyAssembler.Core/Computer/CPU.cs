@@ -1,6 +1,6 @@
 ﻿namespace RiskyAssembler.Core.Computer
 {
-    public class CPU
+    public class CPU : ICPU
     {
         public Registers Registers { get; set; }
         public Register PC { get; set; }
