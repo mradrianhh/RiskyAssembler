@@ -155,11 +155,6 @@ Labels are syntactic sugar that relieves the programmer of the task of rememberi
 
 Tokens are separated by whitespace, commas or both. For the instruction above, the tokens would be do_instruction, OPCODE, rd, rs1 and rs2.
 
-### Interface
-
-- string LookupToken(string);
-
-
 ## Parser
 
 Parser interface
@@ -214,4 +209,30 @@ loop:
 SUB x1 x1 x2
 SW  x1 4(x0)
 BLT x0 x1 loop
+
+### Parse()
+
+1. ADDI x2 x0 1
+2. loop:
+3. SUB x1 x1 x2
+4. SW  x1 4(x0)
+5. BLT x0 x1 loop
+
+Parse lines.
+
+Is it a label, or an instruction?
+
+If it is an instruction, parse the tokens, convert, and construct the instruction.
+
+If it is a label, resolve it to the address sharing the same line number. 
+    If there is no instruction, resolve it to the instruction on the next line number.
+
+- Instructions
+    1. ADDI x2 x0 1
+    2. SUB x1 x1 x2
+    3. SW x1 4(x0)
+    4. BLT x0 x1 loop
+
+- Labels
+    - loop -> SUB x1 x1 x2
 

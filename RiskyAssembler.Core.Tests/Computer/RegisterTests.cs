@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RiskyAssembler.Core.Bitfields;
+using RiskyAssembler.Common.Bitfields;
 using System;
 
 namespace RiskyAssembler.Core.Computer

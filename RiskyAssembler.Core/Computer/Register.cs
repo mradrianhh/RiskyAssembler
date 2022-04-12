@@ -1,4 +1,4 @@
-﻿using RiskyAssembler.Core.Bitfields;
+﻿using RiskyAssembler.Common.Bitfields;
 
 namespace RiskyAssembler.Core.Computer
 {

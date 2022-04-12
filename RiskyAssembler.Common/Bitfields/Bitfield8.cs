@@ -1,4 +1,4 @@
-﻿namespace RiskyAssembler.Core.Bitfields
+﻿namespace RiskyAssembler.Common.Bitfields
 {
     public struct Bitfield8
     {

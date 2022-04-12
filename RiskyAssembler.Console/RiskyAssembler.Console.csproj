@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RiskyAssembler.Assembler\RiskyAssembler.Assembler.csproj" />
     <ProjectReference Include="..\RiskyAssembler.Core\RiskyAssembler.Core.csproj" />
   </ItemGroup>
 

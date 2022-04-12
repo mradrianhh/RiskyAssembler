@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace RiskyAssembler.Core.Bitfields
+namespace RiskyAssembler.Common.Bitfields
 {
     [TestClass]
     public class Bitfield16Tests

@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Console", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Assembler", "RiskyAssembler.Assembler\RiskyAssembler.Assembler.csproj", "{D5B60393-CC91-4724-9F75-0DE4AADA2F41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Assembler.Tests", "RiskyAssembler.Assembler.Tests\RiskyAssembler.Assembler.Tests.csproj", "{091448ED-B508-4E9A-B9B0-8804CDCDF8A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Common", "RiskyAssembler.Common\RiskyAssembler.Common.csproj", "{6B2AD5E6-715C-4031-A626-1DDC63544B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiskyAssembler.Common.Tests", "RiskyAssembler.Common.Tests\RiskyAssembler.Common.Tests.csproj", "{55BF7431-7509-4500-99C4-6430A5646726}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +42,17 @@ Global
 		{D5B60393-CC91-4724-9F75-0DE4AADA2F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5B60393-CC91-4724-9F75-0DE4AADA2F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5B60393-CC91-4724-9F75-0DE4AADA2F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091448ED-B508-4E9A-B9B0-8804CDCDF8A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091448ED-B508-4E9A-B9B0-8804CDCDF8A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091448ED-B508-4E9A-B9B0-8804CDCDF8A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091448ED-B508-4E9A-B9B0-8804CDCDF8A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B2AD5E6-715C-4031-A626-1DDC63544B4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2AD5E6-715C-4031-A626-1DDC63544B4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2AD5E6-715C-4031-A626-1DDC63544B4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2AD5E6-715C-4031-A626-1DDC63544B4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55BF7431-7509-4500-99C4-6430A5646726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55BF7431-7509-4500-99C4-6430A5646726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55BF7431-7509-4500-99C4-6430A5646726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55BF7431-7509-4500-99C4-6430A5646726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
