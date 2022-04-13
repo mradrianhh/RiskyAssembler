@@ -16,6 +16,9 @@ namespace RiskyAssembler.Assembler
         [DataRow("ADDI", TokenType.OPCODE)]
         [DataRow("x0", TokenType.REGISTER)]
         [DataRow("1", TokenType.IMMEDIATE)]
+        [DataRow("10", TokenType.IMMEDIATE)]
+        [DataRow("0x1", TokenType.IMMEDIATE)]
+        [DataRow("0b01", TokenType.IMMEDIATE)]
         public void ShouldReturnExpectedTokenType(string token, TokenType expectedType)
         {
             TokenType actualType = _parser.GetTokenType(token);
@@ -31,7 +34,13 @@ namespace RiskyAssembler.Assembler
 
             string[] actualTokens = _parser.GetTokens(line);
 
-            Assert.AreEqual(expectedTokens, actualTokens);
+            CollectionAssert.AreEqual(expectedTokens, actualTokens);
+        }
+
+        [TestMethod]
+        public void ShouldReturnExpectedToken()
+        {
+            Assert.Inconclusive();
         }
     }
 }

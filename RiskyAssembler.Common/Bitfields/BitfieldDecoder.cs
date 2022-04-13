@@ -39,6 +39,8 @@ namespace RiskyAssembler.Common.Bitfields
                     throw new NotImplementedException("Instruction type not supported yet.");
             }
 
+            instruction.Bitfield = bitfield;
+
             return instruction;
         }
 

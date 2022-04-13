@@ -14,11 +14,11 @@ namespace RiskyAssembler.Assembler
         }
 
         [TestMethod]
-        public void ShouldCreateLstFile()
+        public void ShouldCreateFormattedAsmFile()
         {
-            _formatter.Format("test.asm");
+            var formattedPath = _formatter.Format("test.asm");
 
-            Assert.IsTrue(File.Exists("test.txt"));
+            Assert.IsTrue(File.Exists(formattedPath));
         }
     }
 }
