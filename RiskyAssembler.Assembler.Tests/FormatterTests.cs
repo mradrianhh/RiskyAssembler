@@ -6,10 +6,17 @@ namespace RiskyAssembler.Assembler
     [TestClass]
     public class FormatterTests
     {
+        private Formatter _formatter;
+
+        public FormatterTests()
+        {
+            _formatter = new Formatter();
+        }
+
         [TestMethod]
         public void ShouldCreateLstFile()
         {
-            Formatter.Format("test.asm");
+            _formatter.Format("test.asm");
 
             Assert.IsTrue(File.Exists("test.txt"));
         }

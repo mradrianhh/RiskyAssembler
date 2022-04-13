@@ -236,3 +236,88 @@ If it is a label, resolve it to the address sharing the same line number.
 - Labels
     - loop -> SUB x1 x1 x2
 
+### Token types
+
+- Assembler directive
+    - Starts with '.'. Ex: .align 2
+- Arguments
+    - Immediate
+        - Constant value. Ex: 2, .align 2. ADDI x1, x0, 2.
+    - Register
+        - Symbol. Ex: x0, x1. ADDI x1, x0, 2.
+- Opcode
+    - First token in an instruction, followed by 3 arguments
+
+### Syntax rules
+
+- Assembler directives must be on their own line
+- Single-line macros must be on their own line
+- For a multi-line macro, the opening and ending token must be on their own line, with the macro code contained within it.
+- A label can be on the preceeding or the same line as the instruction it points to.
+- An opcode is followed by 3 arguments, pseudo-instructions are converted before parsing the file to machine code.
+- Everything trailing the comment sign, '#', will be removed.
+
+### Parsing Algorithm
+
+foreach(line in file)
+    tokens := line.Split(" ")
+    foreach(token in tokens)
+        token = token.Replace(",", "") // Remove commas from token
+    
+    switch(GetTokenType(token))
+        case AssemblerDirective:
+            ...
+        case Argument:
+            ...
+        case Opcode:
+            ...
+
+ADDI x1, x0, 2
+ADDI x2, x0, 10
+
+decrease_x1:
+    SUB x2, x2, x1
+    BGT x2, 0, decrease_x1
+end:
+    BEQ x0, x0, end
+
+
+- ADDI
+    - x1
+    - x0
+    - 2
+- ADDI
+    - x2
+    - x0
+    - 10
+- SUB
+    - x2
+    - x2
+    - x1
+- BGT
+    - x2
+    - 0
+    - decrease_x1
+- BEQ
+    - x0
+    - x0
+    - end
+
+# Computer
+
+Loads a program and stores it in memory.
+
+# Assembler
+
+Assembles a binary output file.
+Assembles a byte[] which is the program.
+
+# Parser
+
+Parses each line given from assembler.
+
+# Formatter
+
+Formats the file.
+
+
