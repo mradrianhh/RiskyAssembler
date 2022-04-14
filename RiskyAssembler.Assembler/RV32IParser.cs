@@ -1,4 +1,5 @@
-﻿using RiskyAssembler.Common.Program;
+﻿using RiskyAssembler.Common.Bitfields;
+using RiskyAssembler.Common.Program;
 
 namespace RiskyAssembler.Assembler
 {
@@ -23,14 +24,32 @@ namespace RiskyAssembler.Assembler
             "X24", "X25", "X26", "X27", "X28", "X29", "X30", "X31"
         };
 
+        public Dictionary<string, Operation> OperationMap = new Dictionary<string, Operation>(StringComparer.OrdinalIgnoreCase);
+
         /// <summary>
         /// Formats the file, then parses each instruction into machine-code.
         /// </summary>
         /// <param name="file">The file to parse.</param>
         /// <returns>The binary-converted file.</returns>
-        public Instruction Parse(string line)
+        public Bitfield32 Parse(string line)
         {
-            throw new NotImplementedException();
+            Bitfield32 instruction = new Bitfield32();
+            string[] tokens = GetTokens(line);
+
+            for(int i = 0; i < tokens.Length; i++)
+            {
+                switch (GetTokenType(tokens[i]))
+                {
+                    case TokenType.OPCODE:
+                        break;
+                    case TokenType.IMMEDIATE:
+                        break;
+                    case TokenType.REGISTER:
+                        break;
+                }
+            }
+
+            return instruction;
         }
 
         /// <summary>

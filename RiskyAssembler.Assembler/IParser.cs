@@ -1,9 +1,10 @@
-﻿using RiskyAssembler.Common.Program;
+﻿using RiskyAssembler.Common.Bitfields;
+using RiskyAssembler.Common.Program;
 
 namespace RiskyAssembler.Assembler
 {
     public interface IParser
     {
-        Instruction Parse(string file);
+        Bitfield32 Parse(string file);
     }
 }

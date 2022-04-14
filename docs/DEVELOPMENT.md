@@ -98,6 +98,10 @@
         - Each instruction should have a display string consisting of the instruction address, and the actual instruction commands written by the programmer without the comments. I.e "00: LB   x1, 2(x0)"
         - Each instruction should have a Command associated with it which actually executes the instruction.
 
+13. Implement symbol table
+
+14. Implement Program class
+
 # Assembler
 
 ## ABI
@@ -319,5 +323,93 @@ Parses each line given from assembler.
 # Formatter
 
 Formats the file.
+
+# Instruction format
+
+Opcode defines the instruction type(R/I/S/B/U/J).
+
+Immediates are always sign-extended. Sign bit for all immediates is always bit 31.
+
+Sign extension are performed to increase the number of bits. For example,
+given the binary representation of the decimal value 10 with 6 bits, 00 1010, if we were to sign-extend it to
+16 bits, the result of the operation would be 0000 0000 0000 1010.
+
+Sign extension also seeks to preserve the number's sign(positive/negative), so if we were to sign-extend the 
+decimal value -15 - represented in two's complement as 11 1111 0001 - to 16 bits, the result would be 
+1111 1111 1111 0001, thus preserving both the sign and the value.
+
+## R
+
+Rd is the destination register which stores the result of the operation performed on the source registers.
+Rs1 and Rs2 are the operands of the operation. The source registers.
+Funct3 and funct7 defines the operation.
+
+## I
+
+Rd is the destination register which stores the result of the operation performed on the source register and the immediate(constant).
+Rs1 and Imm are the operans of the operation. Rs1 is a source register, and Imm is a constant value defined by 12 bits, that gets sign-extended to 32 bits.
+Funct3 defines the operation.
+
+## S
+
+Rs2 is the register we store the content in.
+The sum of rs1 and the imm is the address. Imm again gets sign-extended to 32 bits.
+Funct3 defines the type of store(SW/SH/SB).
+
+## B
+
+Rs1 and rs2 are the operands the instruction tests the condition on.
+The immediate defines the address it will jump to if the condition tests true, meaning the pc is incremented by the immediate.
+If it tests false, pc is incremented by four as usual. 
+The immediate gets sign-extended from 12 bits to 32.
+
+## U
+
+Rd denotes the register we wish to store the immediate in.
+Imm denotes the constant value we wish to store in Rd. 
+Important note: since this is an upper-immediate instruction, we will sign-extend it to the left(at the LSB).
+
+## J
+
+Imm denotes the address we are going to jump to, or the offset we're going to increment the pc by.
+Rd stores the pc incremented by four.
+
+# Instruction decoding
+
+## Opcode
+
+The opcode, which denotes the instruction type, is decoded from bit[6:0].
+
+You simply create a 6-bit bitmask to extract it's integer value, and cast it to the InstructionType enum to store in the instruction's
+Type field.
+
+## Rd
+
+When applicable, rd is always of the same width and at the same position, so you can extract it similarly to the opcode by bitmasking
+and casting to the RegisterID enum.
+
+## Rs1
+
+Same as Rd.
+
+## Rs2
+
+Same as Rd.
+
+## Funct3
+
+Funct3 is also always stored at the same position, and is always 3 bits wide, so it can be extracted the same way as Rd. When extracted, it can be stored as an unsigned integer(we don't want it to suddenly store negative values) in the instruction's funct3 field.
+
+## Funct7
+
+Same as funct3, but is 7 bits wide.
+
+## Imm
+
+Immediates are more complicated, because the actual bits of the immediate field itself aren't necessarily stored in order within the 32-bit instruction.
+The position of the bits of the immediate are dependent on the instruction type.
+Immediates are always sign-extended, and their sign-bit is stored in bit 31.
+
+
 
 

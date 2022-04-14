@@ -38,7 +38,7 @@ namespace RiskyAssembler.Assembler
         }
 
         [TestMethod]
-        public void ShouldReturnExpectedToken()
+        public void ShouldReturnExpectedInstruction()
         {
             Assert.Inconclusive();
         }
